@@ -31,12 +31,12 @@ class TestTypedef(unittest.TestCase):
             if base_class is not None:
                 c_code = 'typedef {type} var_t;'.format(type=' '.join(names))
                 f = CTypeFactory(code2ast(c_code))
-                self.assertEqual(f.ctypes_map.keys(), ['var_t'])
+                self.assertEqual(set(f.ctypes_map.keys()), {'var_t'})
                 self.assertTrue(issubclass(f.ctypes_map['var_t'], base_class))
 
     def test_pointer(self):
         f = CTypeFactory(code2ast('typedef short int *var_ptr_t;'))
-        self.assertEqual(f.ctypes_map.keys(), ['var_ptr_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'var_ptr_t'})
         ptr_type = f.ctypes_map['var_ptr_t']
         self.assertTrue(hasattr(ptr_type, 'contents'))
 
@@ -47,40 +47,40 @@ class TestTypedef(unittest.TestCase):
                 short int b;
             } struct_t;
         """))
-        self.assertEqual(f.ctypes_map.keys(), ['struct_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'struct_t'})
         self.assertTrue(issubclass(f.ctypes_map['struct_t'], Structure))
         self.assertTrue(issubclass(dict(f.ctypes_map['struct_t']._fields_)['a'], c_uint8))
         self.assertTrue(issubclass(dict(f.ctypes_map['struct_t']._fields_)['b'], c_int16))
 
     def test_func_ptr_void_void(self):
         f = CTypeFactory(code2ast('typedef void (*callback_t)(void);'))
-        self.assertEqual(f.ctypes_map.keys(), ['callback_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'callback_t'})
         self.assertIsNone(f.ctypes_map['callback_t']._restype_)
         self.assertEqual(len(f.ctypes_map['callback_t']._argtypes_), 0)
 
     def test_func_ptr_void_int(self):
         f = CTypeFactory(code2ast('typedef void (*callback_t)(unsigned char);'))
-        self.assertEqual(f.ctypes_map.keys(), ['callback_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'callback_t'})
         self.assertIsNone(f.ctypes_map['callback_t']._restype_)
         self.assertEqual(len(f.ctypes_map['callback_t']._argtypes_), 1)
         self.assertTrue(issubclass(f.ctypes_map['callback_t']._argtypes_[0], c_uint8))
 
     def test_func_ptr_int_void(self):
         f = CTypeFactory(code2ast('typedef unsigned short int (*callback_t)(void);'))
-        self.assertEqual(f.ctypes_map.keys(), ['callback_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'callback_t'})
         self.assertTrue(issubclass(f.ctypes_map['callback_t']._restype_, c_uint16))
         self.assertEqual(len(f.ctypes_map['callback_t']._argtypes_), 0)
 
     def test_func_ptr_int_int(self):
         f = CTypeFactory(code2ast('typedef unsigned short int (*callback_t)(unsigned char);'))
-        self.assertEqual(f.ctypes_map.keys(), ['callback_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'callback_t'})
         self.assertTrue(issubclass(f.ctypes_map['callback_t']._restype_, c_uint16))
         self.assertEqual(len(f.ctypes_map['callback_t']._argtypes_), 1)
         self.assertTrue(issubclass(f.ctypes_map['callback_t']._argtypes_[0], c_uint8))
 
     def test_func_ptr_int_int_int(self):
         f = CTypeFactory(code2ast('typedef unsigned short int (*callback_t)(unsigned char, unsigned int);'))
-        self.assertEqual(f.ctypes_map.keys(), ['callback_t'])
+        self.assertEqual(set(f.ctypes_map.keys()), {'callback_t'})
         self.assertTrue(issubclass(f.ctypes_map['callback_t']._restype_, c_uint16))
         self.assertEqual(len(f.ctypes_map['callback_t']._argtypes_), 2)
         self.assertTrue(issubclass(f.ctypes_map['callback_t']._argtypes_[0], c_uint8))

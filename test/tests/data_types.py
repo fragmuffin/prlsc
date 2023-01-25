@@ -19,7 +19,7 @@ _this_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 try:
     from ast2ctypes import CTypeFactory
 except ImportError:
-    sys.path.append(os.path.join(_this_path, '../../../../pylib'))
+    sys.path.append(os.path.join(_this_path, '../../lib/py'))
     from ast2ctypes import CTypeFactory
 
 # ========================== Enumerations =========================

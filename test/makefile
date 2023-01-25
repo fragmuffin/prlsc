@@ -19,7 +19,7 @@ COMPILER_FLAGS = \
 	-g
 
 PREPROCESS_INCLUDE_DIRS = \
-	../../../utils/fake-headers
+	../utils/fake-headers
 
 PREPROCESS_FLAGS = \
 	$(addprefix -I,$(PREPROCESS_INCLUDE_DIRS)) \

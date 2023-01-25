@@ -35,7 +35,7 @@ GIT_IGNORED_FILES = \
 
 
 # ===== Make Targets =====
-all: test
+all: clean test
 
 build:
 	gcc $(COMPILER_FLAGS) $(BUILD_FILES) -o $(OUT)

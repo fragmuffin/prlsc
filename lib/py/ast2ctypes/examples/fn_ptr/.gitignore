@@ -1,0 +1,8 @@
+# C compiled files
+*.gcda
+*.gcno
+*.so
+*-preproc.c
+
+# Python compiled files
+*.pyc

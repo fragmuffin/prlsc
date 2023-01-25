@@ -1,0 +1,5 @@
+# ignore build products
+# why?: because their content keeps changing without any change to the source...
+#   probably just the build date or something
+*.so
+*-preproc.c

@@ -1,0 +1,13 @@
+# Build
+*.so
+*-preproc.c
+
+# Coverage
+*.gcda
+*.gcno
+*.info
+html
+
+# SWIG specific
+prlsc_test.py
+*_wrap.c

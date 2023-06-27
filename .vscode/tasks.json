@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "test: clean build",
+			"command": "make -C ${workspaceFolder}/test clean preproc build",
+		},
+	]
+}
